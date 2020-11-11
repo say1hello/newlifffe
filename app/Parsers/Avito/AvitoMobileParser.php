@@ -359,6 +359,7 @@ class AvitoMobileParser
         $obj->desc = $initial_data->item->item->description;
         $obj->person_name = $initial_data->item->item->seller->name;
         $obj->address = $initial_data->item->item->address;
+        $obj->phone_is_anonymous = isset($initial_data->item->item->anonymousNumber);
         $obj->phone = $this->getPhone($initial_data->item->item->id);
 //        foreach ($initial_data->item->item->contacts->list as $contact) {
 //            if ($contact->type == 'phone') {
