@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    
-    public function object() {
-        return $this->belongsTo('App\Object');
+
+    public function object()
+    {
+        return $this->belongsTo('App\Subject');
     }
-    
 }

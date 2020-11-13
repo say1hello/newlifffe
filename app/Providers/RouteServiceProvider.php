@@ -23,26 +23,26 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::pattern('alias','[\w[-_]]+');
+        Route::pattern('alias', '[\w[-_]]+');
 
         parent::boot();
 
         Route::bind('object', function ($value) {
-            return \App\Object::withTrashed()->where('alias',$value)->first();
+            return \App\Subject::withTrashed()->where('alias', $value)->first();
         });
 
         Route::bind('comfort', function ($value) {
-            return \App\Comfort::where('alias',$value)->first();
+            return \App\Comfort::where('alias', $value)->first();
         });
 
         Route::bind('post', function ($value) {
-            return \App\Post::where('alias',$value)->first();
+            return \App\Post::where('alias', $value)->first();
         });
 
         Route::bind('user', function ($value) {
             return \App\User::find($value);
         });
-        
+
         Route::bind('aobject', function ($value) {
             return \App\Aobject::find($value);
         });
@@ -72,8 +72,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -86,8 +86,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }

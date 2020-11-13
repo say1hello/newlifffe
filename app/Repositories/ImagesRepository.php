@@ -2,27 +2,29 @@
 
 namespace App\Repositories;
 
+use Gate;
 use App\Image;
 
-use Gate;
-
-class ImagesRepository extends Repository {
-
-    public function __construct(Image $image) {
+class ImagesRepository extends Repository
+{
+    public function __construct(Image $image)
+    {
         $this->model = $image;
     }
 
-    public function getTmpImg($id) {
-        
-        $images = $this->model->where([['temp_object_id', "=",  $id],['temp', "=", 1]])->get();
+    public function getTmpImg($id)
+    {
+
+        $images = $this->model->where([['temp_object_id', "=", $id], ['temp', "=", 1]])->get();
         return $images;
     }
 
-    public function createImgs($temp_obj_id, $obj_id){
+    public function createImgs($temp_obj_id, $obj_id)
+    {
         $images = $this->getTmpImg($temp_obj_id);
         if (!$images->isEmpty()) {
             $storeFolder = public_path() . '/' . config('settings.theme') . '/uploads/images/';   //2
-            $newFolder = $storeFolder. $obj_id."/";
+            $newFolder = $storeFolder . $obj_id . "/";
             if (!file_exists($newFolder)) {
                 mkdir($newFolder);
             }
@@ -33,11 +35,9 @@ class ImagesRepository extends Repository {
                 $image->temp = 0;
                 $image->object_id = $obj_id;
                 $image->update();
-                rename($folder.$image->new_name, $newFolder.$image->new_name);
-                rename($folder."thumb-".$image->new_name, $newFolder."thumb-".$image->new_name);
+                rename($folder . $image->new_name, $newFolder . $image->new_name);
+                rename($folder . "thumb-" . $image->new_name, $newFolder . "thumb-" . $image->new_name);
             }
         }
     }
 }
-
-?>

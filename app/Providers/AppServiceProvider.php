@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 use Blade;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,9 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        Blade::directive('set',function($exp) {
+        Blade::directive('set', function ($exp) {
 
-            list($name,$val) = explode(',',$exp);
+            list($name, $val) = explode(',', $exp);
 
             return "<?php $name = $val ?>";
 
