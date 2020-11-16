@@ -92,6 +92,8 @@ class IndexController extends SiteController
     }
 
     /**
+     * Квартиры Волжский
+     *
      * @param JavaScriptMaker $jsmaker
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -109,7 +111,9 @@ class IndexController extends SiteController
 
         $parser = new AvitoMobileParser(new \App\Repositories\AobjectsRepository(new \App\Aobject));
         $parser->UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0";
-        $parser->CategoryId = 24;
+        $parser->CategoryId = AvitoMobileParser::CATEGORY_ID_FLAT;
+        $parser->LocationId = AvitoMobileParser::LOCATION_ID_VOLZHSKIY;
+
         try {
             $parser->ParseAllPages(1, Carbon::now()->timestamp - 200);
         } catch (\Exception $exception) {
@@ -118,6 +122,12 @@ class IndexController extends SiteController
 
     }
 
+    /**
+     * Квартиры Средняя Ахтуба
+     *
+     * @param JavaScriptMaker $jsmaker
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function curlAvitoKA(JavaScriptMaker $jsmaker)
     {
 //        if (request()->ip() != "193.124.189.57"){
@@ -129,8 +139,9 @@ class IndexController extends SiteController
 //        exec($cmd, $output);
 //        $this->objectAvitoToBase($output, $jsmaker);
         $parser = new AvitoMobileParser(new \App\Repositories\AobjectsRepository(new \App\Aobject));
-        $parser->CategoryId = 24;
-        $parser->LocationId = 625270;
+        $parser->CategoryId = AvitoMobileParser::CATEGORY_ID_FLAT;
+        $parser->LocationId = AvitoMobileParser::LOCATION_ID_SREDNYAYA_AHTUBA;
+
         try {
             $parser->ParseAllPages(1, Carbon::now()->timestamp - 200);
         } catch (\Exception $exception) {
@@ -138,6 +149,12 @@ class IndexController extends SiteController
         }
     }
 
+    /**
+     * Дома Волжский
+     *
+     * @param JavaScriptMaker $jsmaker
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function curlAvitoH(JavaScriptMaker $jsmaker)
     {
 //        if (request()->ip() != "193.124.189.57"){
@@ -149,7 +166,9 @@ class IndexController extends SiteController
 //        exec($cmd, $output);
 //        $this->objectAvitoToBase($output, $jsmaker);
         $parser = new AvitoMobileParser(new \App\Repositories\AobjectsRepository(new \App\Aobject));
-        $parser->CategoryId = 25;
+        $parser->CategoryId = AvitoMobileParser::CATEGORY_ID_HOUSE;
+        $parser->LocationId = AvitoMobileParser::LOCATION_ID_VOLZHSKIY;
+
         try {
             $parser->ParseAllPages(1, Carbon::now()->timestamp - 200);
         } catch (\Exception $exception) {
@@ -157,6 +176,12 @@ class IndexController extends SiteController
         }
     }
 
+    /**
+     * Дома Средняя Ахтуба
+     *
+     * @param JavaScriptMaker $jsmaker
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function curlAvitoHA(JavaScriptMaker $jsmaker)
     {
 //        if (request()->ip() != "193.124.189.57"){
@@ -168,8 +193,9 @@ class IndexController extends SiteController
 //        exec($cmd, $output);
 //        $this->objectAvitoToBase($output, $jsmaker);
         $parser = new AvitoMobileParser(new \App\Repositories\AobjectsRepository(new \App\Aobject));
-        $parser->CategoryId = 25;
-        $parser->LocationId = 625270;
+        $parser->CategoryId = AvitoMobileParser::CATEGORY_ID_HOUSE;
+        $parser->LocationId = AvitoMobileParser::LOCATION_ID_SREDNYAYA_AHTUBA;
+
         try {
             $parser->ParseAllPages(1, Carbon::now()->timestamp - 200);
         } catch (\Exception $exception) {
@@ -177,6 +203,12 @@ class IndexController extends SiteController
         }
     }
 
+    /**
+     * Комнаты Волжский
+     *
+     * @param JavaScriptMaker $jsmaker
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function curlAvitoC(JavaScriptMaker $jsmaker)
     {
 //        if (request()->ip() != "193.124.189.57"){
@@ -188,7 +220,9 @@ class IndexController extends SiteController
 //        exec($cmd, $output);
 //        $this->objectAvitoToBase($output, $jsmaker);
         $parser = new AvitoMobileParser(new \App\Repositories\AobjectsRepository(new \App\Aobject));
-        $parser->CategoryId = 23;
+        $parser->CategoryId = AvitoMobileParser::CATEGORY_ID_ROOM;
+        $parser->LocationId = AvitoMobileParser::LOCATION_ID_VOLZHSKIY;
+
         try {
             $parser->ParseAllPages(1, Carbon::now()->timestamp - 200);
         } catch (\Exception $exception) {
@@ -196,6 +230,12 @@ class IndexController extends SiteController
         }
     }
 
+    /**
+     * Комнаты Средняя Ахтуба
+     *
+     * @param JavaScriptMaker $jsmaker
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function curlAvitoCA(JavaScriptMaker $jsmaker)
     {
 //        if (request()->ip() != "193.124.189.57"){
@@ -207,8 +247,9 @@ class IndexController extends SiteController
 //        exec($cmd, $output);
 //        $this->objectAvitoToBase($output, $jsmaker);
         $parser = new AvitoMobileParser(new \App\Repositories\AobjectsRepository(new \App\Aobject));
-        $parser->CategoryId = 23;
-        $parser->LocationId = 625270;
+        $parser->CategoryId = AvitoMobileParser::CATEGORY_ID_ROOM;
+        $parser->LocationId = AvitoMobileParser::LOCATION_ID_SREDNYAYA_AHTUBA;
+
         try {
             $parser->ParseAllPages(1, Carbon::now()->timestamp - 200);
         } catch (\Exception $exception) {

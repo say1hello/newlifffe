@@ -20,6 +20,13 @@ use App\Repositories\AobjectsRepository;
  */
 class AvitoMobileParser
 {
+    const LOCATION_ID_VOLZHSKIY = 624850; // Волжский
+    const LOCATION_ID_SREDNYAYA_AHTUBA = 625270; // Средняя Ахтуба
+
+    const CATEGORY_ID_FLAT = 24;
+    const CATEGORY_ID_ROOM = 23;
+    const CATEGORY_ID_HOUSE = 25;
+
     /**
      * @var string
      * Без последнего слеша
@@ -32,19 +39,22 @@ class AvitoMobileParser
 //    public $UserAgent = 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36';
     public $UserAgent = 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Mobile Safari/537.36';
     public $Delay = 5;
+
     /**
      * @var int
      * 30 - дефолт мобильной версии.
      * 100 вроде нормально.
      */
     public $Limit = 30;
+
     /**
      * @var int
      * 24 - квартиры
      * 23 - комнаты
      * 25 - дома, дачи, коттеджи
      */
-    public $CategoryId = 24;
+    public $CategoryId = self::CATEGORY_ID_FLAT;
+
     /**
      * @var bool
      * Искать только частные объявления.
@@ -59,13 +69,14 @@ class AvitoMobileParser
      * 624850 - Волжский
      * 625270 - Средняя Ахтуба
      */
+    public $LocationId = self::LOCATION_ID_VOLZHSKIY;
 
-    public $LocationId = 624850;
     /**
      * @var mixed|string
      * Типо секретный апи ключ
      */
     private $key = '';
+
     /**
      * @var
      */
@@ -108,16 +119,16 @@ class AvitoMobileParser
 
     }
 
-    private function getCity($location_id)
+    /**
+     * @param int $locationId
+     * @return mixed
+     */
+    private function getCityNameByLocationId(int $locationId)
     {
-        switch ($location_id) {
-            case "624850":
-                return "Волжский";
-            case "625270":
-                return "Средняя Ахтуба";
-            default:
-                return false;
-        }
+        return [
+            self::LOCATION_ID_VOLZHSKIY => 'Волжский',
+            self::LOCATION_ID_SREDNYAYA_AHTUBA => 'Средняя Ахтуба',
+        ][$locationId];
     }
 
     private function init()
@@ -261,10 +272,7 @@ class AvitoMobileParser
                                 throw new \Exception("Невалидный JSON на " . $uri);
                             }
                             $obj = $this->generateObject($data);
-                            if (!isset($obj->phone)) {
-                                $obj->phone = "none";
-                            }
-                            $obj->city = $this->getCity($this->LocationId);
+
                             if (isset($item->value->coords)) {
                                 $obj->geo = $item->value->coords->lat . ", " . $item->value->coords->lng;
                             } else {
@@ -272,6 +280,7 @@ class AvitoMobileParser
                             }
                             $obj->area = $item->value->location ?? "";
                             $this->setAddress($obj);
+
                             dump($obj);
                             $this->a_obj->addObj($obj);
                             sleep($this->Delay);
@@ -386,13 +395,13 @@ class AvitoMobileParser
 
     public function generateObject($initial_data)
     {
-        //dump($initial_data);
         $obj = (object)array('id' => $initial_data->item->item->id);
         $obj->title_obj = $initial_data->item->item->title;
         $obj->price = $this->getAllInt($initial_data->item->item->price->value);
         $obj->date = $initial_data->item->item->time;
         $obj->desc = $initial_data->item->item->description;
         $obj->person_name = $initial_data->item->item->seller->name;
+        $obj->city = $this->getCityNameByLocationId($initial_data->item->item->locationId);
         $obj->address = $initial_data->item->item->address;
         $obj->phone_is_anonymous = isset($initial_data->item->item->anonymousNumber);
         $obj->phone = $this->getPhone($initial_data->item->item->id);
@@ -404,6 +413,9 @@ class AvitoMobileParser
 //                break;
 //            }
 //        }
+        if (!isset($obj->phone)) {
+            $obj->phone = "none";
+        }
         $obj->url = $initial_data->item->item->sharing->url;
         $obj->category = $initial_data->item->item->categoryId;
         $title_obj = explode(" ", $obj->title_obj);
