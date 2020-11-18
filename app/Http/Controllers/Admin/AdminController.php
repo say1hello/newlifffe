@@ -85,7 +85,7 @@ class AdminController extends Controller
         );
         $this->m_rep = $m_rep;
         $this->rieltors = $user->Rieltors()->get();
-        $rieltors_inputs = array("all" => "Риелторы");
+        $rieltors_inputs = array("" => "Риелторы");
         foreach ($this->rieltors as $rieltor) {
             $rieltors_inputs = array_add($rieltors_inputs, $rieltor->id, $rieltor->name);
         }

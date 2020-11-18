@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Admin;
 use Gate;
 use File;
 use Storage;
+use App\User;
 use App\Subject;
 use App\Aobject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Components\Array2XML;
-use App\Components\ExcelExport;
+use App\Exports\SubjectsExport;
 use App\Components\JavaScriptMaker;
 use App\Http\Requests\ObjectRequest;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Repositories\AreasRepository;
 use App\Repositories\CitiesRepository;
 use App\Repositories\ObjectsRepository;
@@ -620,19 +622,17 @@ class ObjectController extends AdminController
         }
     }
 
-    public function export(ExcelExport $excel, Request $request)
+    public function export(Request $request)
     {
         $this->checkUser();
-        if ($request->user != "") {
-            $objects = $this->o_rep->get("*", false, false, array("created_id", $request->user));
+
+        if ($request->user) {
+            $userName = User::findOrFail($request->user)->login;
         } else {
-            $objects = $this->o_rep->get();
+            $userName = 'all';
         }
-        $excel->Export($objects, $this->user->login);
-        $path = storage_path() . '/app/public/' . env('THEME', 'default') . '/xlsx/' . $this->user->login . '.xlsx';
-        if (file_exists($path)) {
-            return response()->download($path);
-        }
+
+        return Excel::download(new SubjectsExport($request->user ?? null), 'objects-' . $userName . '-' . date('Y-m-d_H-i-s') . '.xlsx');
     }
 
     public function AobjDelete(Aobject $aobject, Request $request)
