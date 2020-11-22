@@ -227,7 +227,7 @@
                     <h4 class="modal-title" id="outModalLabel">Выгрузка объекта</h4>
                 </div>
                 <div class="modal-body">
-                    {!! Form::open(["url" => route('object.out',["object" => ""]), "class" => "", 'method' => "post", "id" => "out-form"]) !!}
+                    {!! Form::open(["url" => route('object.out', ["object" => ""]), "class" => "", 'method' => "post", "id" => "out-form"]) !!}
                     {!! Form::select('target', $inputs["out"], old('target'), ["class" => "form-control", "id" => "target"]) !!}
                     {!! Form::button('Выгрузить', ['class' => 'form-control btn btn-success','type'=>'submit', 'style' => 'margin-top: 15px;']) !!}
                     <input type="hidden" name="_method" value="PUT">

@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Gate;
 use App\Subject;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class ObjectsRepository extends Repository
 {
@@ -557,8 +557,8 @@ class ObjectsRepository extends Repository
         }
         switch ($scope) {
             case "my":
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->model->My()->count();
                     } else {
@@ -583,8 +583,8 @@ class ObjectsRepository extends Repository
                 }
                 break;
             case "inwork":
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->model->InWork()->count();
                     } else {
@@ -609,8 +609,8 @@ class ObjectsRepository extends Repository
                 }
                 break;
             case "prework":
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->model->InPreWork()->count();
                     } else {
@@ -635,8 +635,8 @@ class ObjectsRepository extends Repository
                 }
                 break;
             case "completed":
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->model->Completed()->count();
                     } else {
@@ -661,8 +661,8 @@ class ObjectsRepository extends Repository
                 }
                 break;
             case "outed":
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->model->Outed()->count();
                     } else {
@@ -687,8 +687,8 @@ class ObjectsRepository extends Repository
                 }
                 break;
             case "myouted":
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->model->MyOuted()->count();
                     } else {
@@ -716,8 +716,8 @@ class ObjectsRepository extends Repository
                 if ($order == ["created_at", "desc"] || $order == "created_at") {
                     $order = ["deleted_at", "desc"];
                 }
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->model->onlyTrashed()->count();
                     } else {
@@ -742,8 +742,8 @@ class ObjectsRepository extends Repository
                 }
                 break;
             case "default":
-                if (Input::has("search")) {
-                    $data = Input::except("search");
+                if (Request::has("search")) {
+                    $data = Request::except("search");
                     if ($count) {
                         $result = $this->get("*", false, false, false, true);
                     } else {

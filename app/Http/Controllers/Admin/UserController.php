@@ -145,11 +145,7 @@ class UserController extends AdminController
     {
         $this->checkUser();
         $result = $this->u_rep->updateUser($request, $user);
-        if (is_array($result) && !empty($result['error'])) {
-            return back()->with($result);
-        }
-
-        return redirect('/admin')->with($result);
+        return back()->with($result);
     }
 
     /**

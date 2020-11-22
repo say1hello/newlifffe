@@ -218,7 +218,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Photo' => Intervention\Image\Facades\Image::class,
-        'Menu' => 'Lavary\Menu\Facade',
+        'Menu' => Lavary\Menu\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
