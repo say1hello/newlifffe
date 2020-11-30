@@ -24,7 +24,7 @@ class PostController extends AdminController
     ) {
         parent::__construct(new \App\Repositories\AdmMenusRepository(new \App\AdmMenu),
             new \App\Repositories\SettingsRepository(new \App\Setting()),
-            new \App\Repositories\AobjectsRepository(new \App\Aobject()), new \App\User);
+            new \App\Repositories\AobjectsRepository(new \App\Aobject()), new \App\Models\User);
 //        if(Gate::denies('VIEW_ADMIN')) {
 //            abort(403);
 //        }

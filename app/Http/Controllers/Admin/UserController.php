@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Photo;
-use App\User;
+use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Repositories\UsersRepository;
 use App\Repositories\RolesRepository;
@@ -24,7 +24,7 @@ class UserController extends AdminController
     ) {
         parent::__construct(new \App\Repositories\AdmMenusRepository(new \App\AdmMenu),
             new \App\Repositories\SettingsRepository(new \App\Setting()),
-            new \App\Repositories\AobjectsRepository(new \App\Aobject()), new \App\User);
+            new \App\Repositories\AobjectsRepository(new \App\Aobject()), new \App\Models\User);
 //        if(Gate::denies('VIEW_ADMIN')) {
 //            abort(403);
 //        }
@@ -101,7 +101,7 @@ class UserController extends AdminController
     /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -151,7 +151,7 @@ class UserController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

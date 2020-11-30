@@ -55,27 +55,27 @@ class Subject extends Model
 
     public function preworkingUser()
     {
-        return $this->belongsTo('App\User', 'pre_working_id');
+        return $this->belongsTo('App\Models\User', 'pre_working_id');
     }
 
     public function createdUser()
     {
-        return $this->belongsTo('App\User', 'created_id');
+        return $this->belongsTo('App\Models\User', 'created_id');
     }
 
     public function workingUser()
     {
-        return $this->belongsTo('App\User', 'working_id');
+        return $this->belongsTo('App\Models\User', 'working_id');
     }
 
     public function deletedUser()
     {
-        return $this->belongsTo('App\User', 'deleted_id');
+        return $this->belongsTo('App\Models\User', 'deleted_id');
     }
 
     public function completedUser()
     {
-        return $this->belongsTo('App\User', 'completed_id');
+        return $this->belongsTo('App\Models\User', 'completed_id');
     }
 
     public function scopeMy($query)
@@ -155,6 +155,6 @@ class Subject extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'object_user', 'object_id', 'object_id');
+        return $this->belongsToMany('App\Models\User', 'object_user', 'object_id', 'object_id');
     }
 }

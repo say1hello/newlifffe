@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Menu;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Repositories\SettingsRepository;

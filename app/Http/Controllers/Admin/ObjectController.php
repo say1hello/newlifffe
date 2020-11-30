@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Gate;
 use File;
 use Storage;
-use App\User;
+use App\Models\User;
 use App\Subject;
 use App\Aobject;
 use Carbon\Carbon;
@@ -35,7 +35,7 @@ class ObjectController extends AdminController
     ) {
         parent::__construct(new \App\Repositories\AdmMenusRepository(new \App\AdmMenu),
             new \App\Repositories\SettingsRepository(new \App\Setting()),
-            new \App\Repositories\AobjectsRepository(new \App\Aobject()), new \App\User);
+            new \App\Repositories\AobjectsRepository(new \App\Aobject()), new \App\Models\User);
 
 //        if(Gate::denies('VIEW_ADMIN')) {
 //            abort(403);

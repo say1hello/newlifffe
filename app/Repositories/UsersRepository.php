@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Gate;
 use Photo;
 use Config;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 

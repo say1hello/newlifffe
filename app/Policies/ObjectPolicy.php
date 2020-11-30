@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\User;
+use App\Models\User;
 use App\Subject;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -20,7 +20,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can view the object.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      * @param \App\Subject $object
      * @return mixed
      */
@@ -32,7 +32,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can create objects.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      * @return mixed
      */
     public function create(User $user)
@@ -43,7 +43,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can update the object.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      * @param \App\Subject $object
      * @return mixed
      */
@@ -66,7 +66,7 @@ class ObjectPolicy
     /**
      * Determine whether the user can delete the object.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      * @param \App\Subject $object
      * @return mixed
      */

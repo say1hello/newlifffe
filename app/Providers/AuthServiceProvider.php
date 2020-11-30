@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\User;
+use App\Models\User;
 use App\Subject;
 use App\Policies\UserPolicy;
 use App\Policies\ObjectPolicy;
