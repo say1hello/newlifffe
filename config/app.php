@@ -165,10 +165,9 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
-        'Lavary\Menu\ServiceProvider',
+        Lavary\Menu\ServiceProvider::class,
 
-        'Maatwebsite\Excel\ExcelServiceProvider',
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -183,7 +182,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,

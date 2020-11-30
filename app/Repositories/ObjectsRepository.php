@@ -73,13 +73,17 @@ class ObjectsRepository extends Repository
                     $phones = array();
                     if (isset($request->client_phone2)) {
                         $phones = $this->getAllInt($request->client_phone2);
-                        foreach ($phones as &$phone1) {
-                            $phone = preg_replace("/[^,.0-9]/", '', $phone1);
-                            if ($phone[0] == 8 || $phone[0] == 7) {
-                                $phone = substr($phone, 1);
+                        foreach ($phones as $key => &$phone) {
+                            if ($phone) {
+                                $phone = preg_replace("/[^,.0-9]/", '', $phone);
+                                if ($phone[0] == 8 || $phone[0] == 7) {
+                                    $phone = substr($phone, 1);
+                                }
+                            } else {
+                                unset($phones[$key]);
                             }
-                            $phone1 = $phone;
                         }
+                        unset($phone);
                     }
                     $this->model->phones = implode(";", $phones);
                     $client = new \stdClass;
@@ -142,13 +146,17 @@ class ObjectsRepository extends Repository
                     $phones = array();
                     if (isset($request->client_phone2)) {
                         $phones = $this->getAllInt($request->client_phone2);
-                        foreach ($phones as &$phone1) {
-                            $phone = preg_replace("/[^,.0-9]/", '', $phone1);
-                            if ($phone[0] == 8 || $phone[0] == 7) {
-                                $phone = substr($phone, 1);
+                        foreach ($phones as $key => &$phone) {
+                            if ($phone) {
+                                $phone = preg_replace("/[^,.0-9]/", '', $phone);
+                                if ($phone[0] == 8 || $phone[0] == 7) {
+                                    $phone = substr($phone, 1);
+                                }
+                            } else {
+                                unset($phones[$key]);
                             }
-                            $phone1 = $phone;
                         }
+                        unset($phone);
                     }
                     $this->model->phones = implode(";", $phones);
                     $client = new \stdClass;
@@ -213,13 +221,17 @@ class ObjectsRepository extends Repository
                     $phones = array();
                     if (isset($request->client_phone2)) {
                         $phones = $this->getAllInt($request->client_phone2);
-                        foreach ($phones as &$phone1) {
-                            $phone = preg_replace("/[^,.0-9]/", '', $phone1);
-                            if ($phone[0] == 8 || $phone[0] == 7) {
-                                $phone = substr($phone, 1);
+                        foreach ($phones as $key => &$phone) {
+                            if ($phone) {
+                                $phone = preg_replace("/[^,.0-9]/", '', $phone);
+                                if ($phone[0] == 8 || $phone[0] == 7) {
+                                    $phone = substr($phone, 1);
+                                }
+                            } else {
+                                unset($phones[$key]);
                             }
-                            $phone1 = $phone;
                         }
+                        unset($phone);
                     }
                     $this->model->phones = implode(";", $phones);
                     $client = new \stdClass;
@@ -365,13 +377,17 @@ class ObjectsRepository extends Repository
                     $phones = array();
                     if (isset($request->client_phone2)) {
                         $phones = $this->getAllInt($request->client_phone2);
-                        foreach ($phones as &$phone1) {
-                            $phone = preg_replace("/[^,.0-9]/", '', $phone1);
-                            if ($phone[0] == 8 || $phone[0] == 7) {
-                                $phone = substr($phone, 1);
+                        foreach ($phones as $key => &$phone) {
+                            if ($phone) {
+                                $phone = preg_replace("/[^,.0-9]/", '', $phone);
+                                if ($phone[0] == 8 || $phone[0] == 7) {
+                                    $phone = substr($phone, 1);
+                                }
+                            } else {
+                                unset($phones[$key]);
                             }
-                            $phone1 = $phone;
                         }
+                        unset($phone);
                     }
                     $object->phones = implode(";", $phones);
                     $client = new \stdClass;
@@ -423,13 +439,17 @@ class ObjectsRepository extends Repository
                     $phones = array();
                     if (isset($request->client_phone2)) {
                         $phones = $this->getAllInt($request->client_phone2);
-                        foreach ($phones as &$phone1) {
-                            $phone = preg_replace("/[^,.0-9]/", '', $phone1);
-                            if ($phone[0] == 8 || $phone[0] == 7) {
-                                $phone = substr($phone, 1);
+                        foreach ($phones as $key => &$phone) {
+                            if ($phone) {
+                                $phone = preg_replace("/[^,.0-9]/", '', $phone);
+                                if ($phone[0] == 8 || $phone[0] == 7) {
+                                    $phone = substr($phone, 1);
+                                }
+                            } else {
+                                unset($phones[$key]);
                             }
-                            $phone1 = $phone;
                         }
+                        unset($phone);
                     }
                     $object->phones = implode(";", $phones);
                     $client = new \stdClass;
@@ -483,13 +503,17 @@ class ObjectsRepository extends Repository
                     $phones = array();
                     if (isset($request->client_phone2)) {
                         $phones = $this->getAllInt($request->client_phone2);
-                        foreach ($phones as &$phone1) {
-                            $phone = preg_replace("/[^,.0-9]/", '', $phone1);
-                            if ($phone[0] == 8 || $phone[0] == 7) {
-                                $phone = substr($phone, 1);
+                        foreach ($phones as $key => &$phone) {
+                            if ($phone) {
+                                $phone = preg_replace("/[^,.0-9]/", '', $phone);
+                                if ($phone[0] == 8 || $phone[0] == 7) {
+                                    $phone = substr($phone, 1);
+                                }
+                            } else {
+                                unset($phones[$key]);
                             }
-                            $phone1 = $phone;
                         }
+                        unset($phone);
                     }
                     $object->phones = implode(";", $phones);
                     $client = new \stdClass;
