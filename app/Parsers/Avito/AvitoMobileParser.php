@@ -8,7 +8,7 @@
 
 namespace App\Parsers\Avito;
 
-use Log;
+use App\Image;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\AobjectsRepository;
@@ -283,6 +283,7 @@ class AvitoMobileParser
 
                             dump($obj);
                             $this->a_obj->addObj($obj);
+                            $this->uploadImages($obj->id, $item->value);
                             sleep($this->Delay);
                         } else {
                             $ao = $this->newFromStd($tmp_obj);
@@ -390,6 +391,23 @@ class AvitoMobileParser
             preg_match_all($re, $obj->address, $matches, PREG_SET_ORDER,
                 0); // Print the entire match result var_dump($matches);
             $obj->address = trim($matches[0][1] ?? $obj->address);
+        }
+    }
+
+    private function uploadImages($subjectID, $item)
+    {
+        $item = json_decode(json_encode($item), true);
+
+        $fileName = str_random(8) . '.jpg';
+
+        if (isset($item['imageList'])) {
+            foreach ($item['imageList'] as $imageSizesUrls) {
+                $uploadedFile = file_get_contents($imageSizesUrls['1280x960'], false);
+                Image::upload($uploadedFile, $fileName, 'avito', $subjectID, 0, true);
+            }
+        } elseif (isset($item['images']['main'], $item['images']['main']['640x480'])) {
+            $uploadedFile = file_get_contents($item['images']['main']['640x480'], false);
+            Image::upload($uploadedFile, $fileName, 'avito', $subjectID, 0, true);
         }
     }
 
@@ -713,7 +731,6 @@ class AvitoMobileParser
                 break;
         }
     }
-
 
     public function getAllInt($string)
     {

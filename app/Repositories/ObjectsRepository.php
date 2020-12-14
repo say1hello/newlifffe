@@ -100,7 +100,7 @@ class ObjectsRepository extends Repository
                     $client->need = (isset($request->client_need) ? implode(",", $request->client_need) : null);
                     $this->model->client = json_encode($client, JSON_UNESCAPED_UNICODE);
                     if ($this->model->save()) {
-                        $this->i_rep->createImgs($temp_obj_id, $this->model->id);
+                        $this->i_rep->createImagesFromTemp($temp_obj_id, $this->model->id);
                         $comforts = $this->c_rep->getComfortsId($request->comfort);
                         if ($comforts) {
                             $this->model->comforts()->attach($comforts);
@@ -173,7 +173,7 @@ class ObjectsRepository extends Repository
                     $client->need = (isset($request->client_need) ? implode(",", $request->client_need) : null);
                     $this->model->client = json_encode($client, JSON_UNESCAPED_UNICODE);
                     if ($this->model->save()) {
-                        $this->i_rep->createImgs($temp_obj_id, $this->model->id);
+                        $this->i_rep->createImagesFromTemp($temp_obj_id, $this->model->id);
                         $comforts = $this->c_rep->getComfortsId($request->comfort);
                         if ($comforts) {
                             $this->model->comforts()->attach($comforts);
@@ -248,7 +248,7 @@ class ObjectsRepository extends Repository
                     $client->need = (isset($request->client_need) ? implode(",", $request->client_need) : null);
                     $this->model->client = json_encode($client, JSON_UNESCAPED_UNICODE);
                     if ($this->model->save()) {
-                        $this->i_rep->createImgs($temp_obj_id, $this->model->id);
+                        $this->i_rep->createImagesFromTemp($temp_obj_id, $this->model->id);
                         $comforts = $this->c_rep->getComfortsId($request->comfort);
                         if ($comforts) {
                             $this->model->comforts()->attach($comforts);

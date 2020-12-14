@@ -65,4 +65,9 @@ class Aobject extends Model
     {
         return $query->whereCategory(3);
     }
+
+    public function images()
+    {
+        return $this->hasMany('App\Image', 'external_subject_id');
+    }
 }

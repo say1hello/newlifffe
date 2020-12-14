@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use Gate;
 use App\Image;
 
 class ImagesRepository extends Repository
@@ -12,16 +11,14 @@ class ImagesRepository extends Repository
         $this->model = $image;
     }
 
-    public function getTmpImg($id)
+    public function getTempImages($subjectId)
     {
-
-        $images = $this->model->where([['temp_object_id', "=", $id], ['temp', "=", 1]])->get();
-        return $images;
+        return $this->model->where([['temp_object_id', "=", $subjectId], ['temp', "=", 1]])->get();
     }
 
-    public function createImgs($temp_obj_id, $obj_id)
+    public function createImagesFromTemp($temp_obj_id, $obj_id)
     {
-        $images = $this->getTmpImg($temp_obj_id);
+        $images = $this->getTempImages($temp_obj_id);
         if (!$images->isEmpty()) {
             $storeFolder = public_path() . '/' . config('settings.theme') . '/uploads/images/';   //2
             $newFolder = $storeFolder . $obj_id . "/";

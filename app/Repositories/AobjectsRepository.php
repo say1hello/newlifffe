@@ -155,7 +155,6 @@ class AobjectsRepository extends Repository
         }
     }
 
-
     public function searchObject($data, $pagination, $order)
     {
         if ($order == "pricedesc") {
