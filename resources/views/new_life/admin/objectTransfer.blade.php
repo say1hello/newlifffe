@@ -420,7 +420,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="client_phone" class="form-label semibold">Телефон</label>
+                                            <label for="client_phone" class="form-label semibold">
+                                                Телефон
+                                                @if($object->client_phone_is_anonymous == 1)
+                                                    <span class="button-text text-danger">(Номер защищен)</span>
+                                                @endif
+                                            </label>
                                             <div class="input-group">
                                                 <div class="input-group-addon">
                                                     <span>+7</span>
