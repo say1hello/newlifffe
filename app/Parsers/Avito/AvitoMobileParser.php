@@ -398,14 +398,12 @@ class AvitoMobileParser
     {
         $item = json_decode(json_encode($item), true);
 
-        $fileName = str_random(8) . '.jpg';
-
         if (isset($item['imageList'])) {
             foreach ($item['imageList'] as $imageSizesUrls) {
-                Image::uploadWithCurl($imageSizesUrls['1280x960'], $fileName, $subjectID, 'avito', 0, true);
+                Image::uploadWithCurl($imageSizesUrls['1280x960'], $subjectID, 'avito', 0, true);
             }
         } elseif (isset($item['images']['main'], $item['images']['main']['1280x960'])) {
-            Image::uploadWithCurl($item['images']['main']['1280x960'], $fileName, $subjectID, 'avito', 0, true);
+            Image::uploadWithCurl($item['images']['main']['1280x960'], $subjectID, 'avito', 0, true);
         }
     }
 

@@ -13,7 +13,7 @@ class Image extends Model
         return $this->belongsTo('App\Subject');
     }
 
-    public static function uploadWithCurl($url, $fileName, $subjectID, $subjectType, $isTemp = 0, $isExternalSubject = false)
+    public static function uploadWithCurl($url, $subjectID, $subjectType, $isTemp = 0, $isExternalSubject = false)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -21,7 +21,7 @@ class Image extends Model
         $uploadedFile = curl_exec($ch);
         curl_close($ch);
 
-        self::upload($uploadedFile, $fileName, $subjectID, $subjectType, $isTemp, $isExternalSubject);
+        self::upload($uploadedFile, $url, $subjectID, $subjectType, $isTemp, $isExternalSubject);
     }
 
     public static function upload($uploadedFile, $origName, $subjectID, $subjectType, $isTemp = 0, $isExternalSubject = false)
