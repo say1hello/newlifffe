@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use URL;
 use Menu;
-use Gate;
 use Auth;
-use Route;
 use Storage;
 use App\Post;
 use App\Subject;

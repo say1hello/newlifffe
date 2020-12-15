@@ -402,12 +402,10 @@ class AvitoMobileParser
 
         if (isset($item['imageList'])) {
             foreach ($item['imageList'] as $imageSizesUrls) {
-                $uploadedFile = file_get_contents($imageSizesUrls['1280x960'], false);
-                Image::upload($uploadedFile, $fileName, 'avito', $subjectID, 0, true);
+                Image::uploadWithCurl($imageSizesUrls['1280x960'], $fileName, $subjectID, 'avito', 0, true);
             }
-        } elseif (isset($item['images']['main'], $item['images']['main']['640x480'])) {
-            $uploadedFile = file_get_contents($item['images']['main']['640x480'], false);
-            Image::upload($uploadedFile, $fileName, 'avito', $subjectID, 0, true);
+        } elseif (isset($item['images']['main'], $item['images']['main']['1280x960'])) {
+            Image::uploadWithCurl($item['images']['main']['1280x960'], $fileName, $subjectID, 'avito', 0, true);
         }
     }
 

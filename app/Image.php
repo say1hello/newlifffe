@@ -13,6 +13,17 @@ class Image extends Model
         return $this->belongsTo('App\Subject');
     }
 
+    public static function uploadWithCurl($url, $fileName, $subjectID, $subjectType, $isTemp = 0, $isExternalSubject = false)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $uploadedFile = curl_exec($ch);
+        curl_close($ch);
+
+        self::upload($uploadedFile, $fileName, $subjectID, $subjectType, $isTemp, $isExternalSubject);
+    }
+
     public static function upload($uploadedFile, $origName, $subjectID, $subjectType, $isTemp = 0, $isExternalSubject = false)
     {
         $uploadDir = self::getUploadDir($subjectID, $subjectType, $isTemp);
@@ -60,7 +71,7 @@ class Image extends Model
             $uploadDir = $storeFolder . $subjectType . "/". $subjectID . "/";
         }
         if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777);
+            mkdir($uploadDir, 0777, true);
         }
 
         return $uploadDir;
