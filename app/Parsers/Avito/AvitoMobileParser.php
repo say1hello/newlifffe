@@ -400,10 +400,32 @@ class AvitoMobileParser
 
         if (isset($item['imageList'])) {
             foreach ($item['imageList'] as $imageSizesUrls) {
-                Image::uploadWithCurl($imageSizesUrls['1280x960'], $subjectID, 'avito', 0, true);
+                $imageUrl = '';
+                if (isset($imageSizesUrls['1280x960'])) {
+                    $imageUrl = $imageSizesUrls['1280x960'];
+                } elseif (isset($imageSizesUrls['640x480'])) {
+                    $imageUrl = $imageSizesUrls['640x480'];
+                } elseif (isset($imageSizesUrls['432x324'])) {
+                    $imageUrl = $imageSizesUrls['432x324'];
+                }
+
+                if ($imageUrl) {
+                    Image::uploadWithCurl($imageUrl, $subjectID, 'avito', 0, true);
+                }
             }
-        } elseif (isset($item['images']['main'], $item['images']['main']['1280x960'])) {
-            Image::uploadWithCurl($item['images']['main']['1280x960'], $subjectID, 'avito', 0, true);
+        } elseif (isset($item['images']['main'])) {
+            $imageUrl = '';
+            if (isset($item['images']['main']['1280x960'])) {
+                $imageUrl = $item['images']['main']['1280x960'];
+            } elseif (isset($item['images']['main']['640x480'])) {
+                $imageUrl = $item['images']['main']['640x480'];
+            } elseif (isset($item['images']['main']['432x324'])) {
+                $imageUrl = $item['images']['main']['432x324'];
+            }
+
+            if ($imageUrl) {
+                Image::uploadWithCurl($imageUrl, $subjectID, 'avito', 0, true);
+            }
         }
     }
 
