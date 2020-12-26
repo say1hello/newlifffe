@@ -17,7 +17,8 @@ class Storage extends Controller
             $uploadedFile = $request->file('image');
             if ($uploadedFile->isValid()) {
                 $data = $request->except('_token', 'image');
-                Image::upload($uploadedFile, $uploadedFile->getClientOriginalName(), $data["obj_id"], 'agency', $data["tmp_img"]);
+                Image::upload($uploadedFile, $uploadedFile->getClientOriginalName(), $data["obj_id"], 'agency',
+                    $data["tmp_img"]);
             }
         }
     }
@@ -63,14 +64,17 @@ class Storage extends Controller
     {
         $result = array();
         $obj_id = $request['objid'];
-        $scandir = public_path() . '/' . config('settings.theme') . '/uploads/images/' . $obj_id . "/";
-        $files = scandir($scandir);                 //1
-        if (false !== $files) {
-            foreach ($files as $file) {
-                if ('.' != $file && '..' != $file && !preg_match("/^thumb-.*/", $file)) {       //2
-                    $obj['name'] = $file;
-                    $obj['size'] = filesize($scandir . $file);
-                    $result[] = $obj;
+        $obj_type = $request['objtype'];
+        $dir = public_path() . '/' . config('settings.theme') . '/uploads/images/' . $obj_type . "/" . $obj_id . "/";
+        if (is_dir($dir)) {
+            $files = scandir($dir);
+            if (false !== $files) {
+                foreach ($files as $file) {
+                    if ('.' != $file && '..' != $file && !preg_match("/^thumb-.*/", $file)) {
+                        $obj['name'] = $file;
+                        $obj['size'] = filesize($dir . $file);
+                        $result[] = $obj;
+                    }
                 }
             }
         }

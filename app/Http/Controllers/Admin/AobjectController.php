@@ -227,7 +227,7 @@ class AobjectController extends AdminController
         }
         $this->inputs = array_add($this->inputs, "obj_city", $obj_city);
         $comforts = $this->com_rep->get();
-        $jsmaker->setJs("obj-edit", $aobject, true, csrf_token(), $this->randStr);
+        $jsmaker->setJs("obj-edit", $aobject, true, csrf_token(), $this->randStr, false, 'avito');
         //сделать проверочки
         $phone = preg_replace("/\D/", '', $aobject->client_contacts);
         if ($phone[0] == 8 || $phone[0] == 7) {
@@ -255,7 +255,7 @@ class AobjectController extends AdminController
         $request->obj_city = $this->getCityid($request->obj_city);
         $obj_area_input = "obj_area" . $request->obj_city;
         $area = $this->getAreaid($request->input($obj_area_input));
-        $result = $this->o_rep->addObject($request, $area);
+        $result = $this->o_rep->addObject($request, $area, true);
         if (is_array($result) && !empty($result['error'])) {
             return back()->with($result);
         }

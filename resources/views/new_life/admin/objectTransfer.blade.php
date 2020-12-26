@@ -3,13 +3,18 @@
         <div class="tbl-row">
             <div class="tbl-cell tbl-cell-title">
                 <h3 id="h3-create-obj">Трансфер объекта</h3>
-                <button id="upload-img" class="btn btn-primary clearfix" data-toggle="modal" data-target="#myModal">
-                    Загрузить изображения
-                </button>
             </div>
         </div>
     </header>
+
     <div class="box-typical-body">
+        <h3>Изображения</h3>
+        {!! Form::open(["url" => route("adminObjUplImg"), "class" => "dropzone", 'method' => "POST", "id" => "my-dropzone"]) !!}
+        {!! Form::hidden('obj_id', isset($object->id)? $object->id: old("obj-id", $obj_id), ["id" => "obj-id"]) !!}
+        {!! Form::hidden('tmp_img', 1, ["id" => "tmp-img"]) !!}
+        {!! Form::close() !!}
+        <br>
+        <br>
         {!! Form::open(["url" => route('aobject.store'), "class" => "form-wizard", 'method' => "POST", "id" => "objCreate"]) !!}
         <div>
             <section>
@@ -485,23 +490,3 @@
         {!! Form::close() !!}
     </div><!--.box-typical-body-->
 </section>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Загрузка изображений</h4>
-            </div>
-            <div class="modal-body">
-                {!! Form::open(["url" => route("adminObjUplImg"), "class" => "dropzone", 'method' => "POST", "id" => "my-dropzone"]) !!}
-                {!! Form::hidden('obj_id', isset($object->id)? $object->id: old("obj-id", $obj_id), ["id" => "obj-id"]) !!}
-                {!! Form::hidden('tmp_img', 1, ["id" => "tmp-img"]) !!}
-                {!! Form::close() !!}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-            </div>
-        </div>
-    </div>
-</div>

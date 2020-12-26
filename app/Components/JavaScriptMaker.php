@@ -19,8 +19,15 @@ class JavaScriptMaker
     protected $cat_script_js;
     protected $specOffer_js;
 
-    public function setJs($type, $request = "", $static = true, $token = "", $randStr, $specOffer = false)
-    {
+    public function setJs(
+        $type,
+        $request = "",
+        $static = true,
+        $token = "",
+        $randStr,
+        $specOffer = false,
+        $subjectType = 'agency'
+    ) {
         $this->sliders = "
         function initSlider(slider) {
         switch (slider) {
@@ -2219,10 +2226,9 @@ class JavaScriptMaker
                             init: function () {
                                 thisDropzone = this;                               
                                 var id = $('#obj-id').val();
-                                <!-- 4 -->
-                                $.get('" . route('adminObjGetImg') . "',{ objid: id}).done( function (data) {
+                                $.get('" . route('adminObjGetImg') . "', { objtype:'" . $subjectType . "', objid:id }).done( function (data) {
                                     $.each(data, function (index, item) {
-                                        //// Create the mock file:
+                                        // Create the mock file:
                                         var mockFile = {
                                             name: item.name,
                                             size: item.size,
@@ -2231,16 +2237,14 @@ class JavaScriptMaker
                                         };
                     
                                         // Call the default addedfile event handler
-                                        thisDropzone.emit(\"addedfile\", mockFile);
+                                        thisDropzone.emit('addedfile', mockFile);
                     
                                         // And optionally show the thumbnail of the file:
-                                        //thisDropzone.emit(\"thumbnail\", mockFile, \"uploads / \"+item.name);
-                    
-                                        thisDropzone.createThumbnailFromUrl(mockFile, \"" . asset(config('settings.theme')) . "/uploads/images/" . $request->id . "/\" + item . name);
+//                                        thisDropzone.emit('thumbnail', mockFile, '" . asset(config('settings.theme')) . "/uploads/images/" . $subjectType . "/" . $request->id . "/' + item.name);
 
-                                        thisDropzone . emit(\"complete\", mockFile);
-
-                                        thisDropzone . files . push(mockFile);
+                                        thisDropzone.createThumbnailFromUrl(mockFile, '" . asset(config('settings.theme')) . "/uploads/images/" . $subjectType . "/" . $request->id . "/' + item.name);
+                                        thisDropzone.emit('complete', mockFile);
+                                        thisDropzone.files.push(mockFile);
                                         });
                                     });
                                 }

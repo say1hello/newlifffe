@@ -229,7 +229,6 @@ class ObjectController extends AdminController
         }
     }
 
-
     public function getJSON()
     {
         $objects = $this->o_rep->get("*");

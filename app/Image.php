@@ -24,7 +24,7 @@ class Image extends Model
         self::upload($uploadedFile, $url, $subjectID, $subjectType, $isTemp, $isExternalSubject);
     }
 
-    public static function upload($uploadedFile, $origName, $subjectID, $subjectType, $isTemp = 0, $isExternalSubject = false)
+    public static function upload($uploadedFile, $origName, $subjectID, $subjectType = 'agency', $isTemp = 0, $isExternalSubject = false)
     {
         $uploadDir = self::getUploadDir($subjectID, $subjectType, $isTemp);
 
@@ -62,7 +62,7 @@ class Image extends Model
         $subjectImage->save();
     }
 
-    private static function getUploadDir($subjectID, $subjectType, $isTemp)
+    public static function getUploadDir($subjectID, $subjectType = 'agency', $isTemp = 0)
     {
         $storeFolder = public_path() . '/' . config('settings.theme') . '/uploads/images/';   //2
         if ($isTemp == 1) {
