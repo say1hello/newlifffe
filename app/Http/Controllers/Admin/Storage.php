@@ -65,7 +65,7 @@ class Storage extends Controller
         $result = array();
         $obj_id = $request['objid'];
         $obj_type = $request['objtype'];
-        $dir = public_path() . '/' . config('settings.theme') . '/uploads/images/' . $obj_type . "/" . $obj_id . "/";
+        $dir = public_path() . '/' . config('settings.theme') . "/uploads/images/$obj_type/$obj_id/";
         if (is_dir($dir)) {
             $files = scandir($dir);
             if (false !== $files) {

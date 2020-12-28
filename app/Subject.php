@@ -2,9 +2,28 @@
 
 namespace App;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * Class Subject
+ *
+ * @property Comfort[] $comforts
+ * @property Area $raion
+ * @property City $gorod
+ * @property Image[] $images
+ * @property Call[] $calls
+ * @property User[] $users
+ * @property User $preworkingUser
+ * @property User $createdUser
+ * @property User $workingUser
+ * @property User $deletedUser
+ * @property User $completedUser
+ *
+ * @package App
+ */
 
 class Subject extends Model
 {
@@ -29,11 +48,17 @@ class Subject extends Model
         return $this->belongsTo('App\City', 'city');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function images()
     {
         return $this->hasMany('App\Image', 'object_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function calls()
     {
         return $this->hasMany('App\Call', 'object_id');
@@ -53,26 +78,41 @@ class Subject extends Model
         return $city . ", " . $area . ", " . $this->address;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function preworkingUser()
     {
         return $this->belongsTo('App\Models\User', 'pre_working_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function createdUser()
     {
         return $this->belongsTo('App\Models\User', 'created_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function workingUser()
     {
         return $this->belongsTo('App\Models\User', 'working_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function deletedUser()
     {
         return $this->belongsTo('App\Models\User', 'deleted_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function completedUser()
     {
         return $this->belongsTo('App\Models\User', 'completed_id');

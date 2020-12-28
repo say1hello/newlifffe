@@ -953,7 +953,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = array("@attributes" => array("url" => asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name));
+                        $images[] = array("@attributes" => array("url" => $image->getUrl()));
                     }
                     $obj["Images"] = array("Image" => $images);
                 }
@@ -995,7 +995,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = array("@attributes" => array("url" => asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name));
+                        $images[] = array("@attributes" => array("url" => $image->getUrl()));
                     }
                     $obj["Images"] = array("Image" => $images);
                 }
@@ -1035,7 +1035,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = array("@attributes" => array("url" => asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name));
+                        $images[] = array("@attributes" => array("url" => $image->getUrl()));
                     }
                     $obj["Images"] = array("Image" => $images);
                 }
@@ -1089,7 +1089,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name;
+                        $images[] = $image->getUrl();
                     }
                     $obj["image"] = $images;
                 }
@@ -1135,7 +1135,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name;
+                        $images[] = $image->getUrl();
                     }
                     $obj["image"] = $images;
                 }
@@ -1178,7 +1178,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name;
+                        $images[] = $image->getUrl();
                     }
                     $obj["image"] = $images;
                 }
@@ -1240,7 +1240,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = array("@attributes" => array("url" => asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name));
+                        $images[] = array("@attributes" => array("url" => $image->getUrl()));
                     }
                     $obj["Images"] = array("Image" => $images);
                 }
@@ -1281,7 +1281,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = array("@attributes" => array("url" => asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name));
+                        $images[] = array("@attributes" => array("url" => $image->getUrl()));
                     }
                     $obj["Images"] = array("Image" => $images);
                 }
@@ -1320,7 +1320,7 @@ class ObjectController extends AdminController
                 if ($object->images->isNotEmpty()) {
                     $images = array();
                     foreach ($object->images as $image) {
-                        $images[] = array("@attributes" => array("url" => asset(config('settings.theme')) . "/uploads/images/" . $image->object_id . "/" . $image->new_name));
+                        $images[] = array("@attributes" => array("url" => $image->getUrl()));
                     }
                     $obj["Images"] = array("Image" => $images);
                 }

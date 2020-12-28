@@ -77,6 +77,11 @@ class Image extends Model
         return $uploadDir;
     }
 
+    public function getUrl($subjectType = 'agency')
+    {
+        return asset(config('settings.theme')) . "/uploads/images/$subjectType/{$this->object_id}/{$this->new_name}";
+    }
+
     private static function getTypeImg($mime)
     {
         if ($mime == "image/gif") {
